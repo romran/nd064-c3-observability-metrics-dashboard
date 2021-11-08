@@ -2,8 +2,16 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: trial-app
+  annotations:
+    prometheus.io/path: /metrics
+    prometheus.io/port: trial-port
+    prometheus.io/scrape: "true"
+    sidecar.jaegertracing.io/inject: "true"
+  labels:
+    name: trial
+    release: prometheus
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: trial
@@ -14,9 +22,14 @@ spec:
     spec:
       containers:
       - name: trial
-        image: ghcr.io/thejaysmith/trial:v1
+        image: romran/nd064-c3-trial:latest
         ports:
-        - containerPort: 8080
+        - name: trial-port
+          containerPort: 8080
+          protocol: TCP
+        env:
+        - name: JAEGER_HOST
+          value: my-traces-agent.observability.svc.cluster.local
 ---
 apiVersion: v1
 kind: Service
@@ -26,6 +39,10 @@ spec:
   selector:
     app: trial
   ports:
-    - port: 8080
-      targetPort: 8080
-  type: LoadBalancer
+    - name: trial
+      protocol: TCP
+      port: 80
+      targetPort: trial-port
+      nodePort: 30002
+  type: NodePort
+

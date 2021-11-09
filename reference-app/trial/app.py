@@ -3,6 +3,7 @@ import logging
 
 from jaeger_client import Config
 # from jaeger_client.metrics.prometheus import PrometheusMetricsFactory
+from prometheus_flask_exporter import PrometheusMetrics
 from opentelemetry import trace
 # from opentelemetry.exporter import jaeger
 from opentelemetry.sdk.trace import TracerProvider
@@ -52,6 +53,7 @@ def init_tracer(service):
     return config.initialize_tracer()
 
 tracer = init_tracer('first-service')
+metrics = PrometheusMetrics(app)
 
 @app.route('/')
 def homepage():

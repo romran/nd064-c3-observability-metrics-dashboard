@@ -44,5 +44,5 @@ spec:
       protocol: TCP
       port: 80
       targetPort: frontend-port
-      nodePort: 30001
+      nodePort: 30010
   type: NodePort

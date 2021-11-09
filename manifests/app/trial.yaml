@@ -43,6 +43,6 @@ spec:
       protocol: TCP
       port: 80
       targetPort: trial-port
-      nodePort: 30002
+      nodePort: 30015
   type: NodePort
 

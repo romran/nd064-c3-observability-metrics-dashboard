@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-app
+  name: backend
   annotations:
     prometheus.io/path: /metrics
-    prometheus.io/port: backend-port
+    prometheus.io/port: backendport
     prometheus.io/scrape: "true"
     sidecar.jaegertracing.io/inject: "true"
   labels:
@@ -25,12 +25,12 @@ spec:
         image: romran/nd064-c3-backend:latest
         imagePullPolicy: Always
         ports:
-        - name: backend-port
+        - name: backendport
           containerPort: 8080
           protocol: TCP
         env:
         - name: JAEGER_HOST
-          value: my-traces-agent.observability.svc.cluster.local
+          value: simplest-query.observability.svc.cluster.local
 ---
 apiVersion: v1
 kind: Service
@@ -43,6 +43,6 @@ spec:
     - name: backend
       protocol: TCP
       port: 80
-      targetPort: backend-port
-      nodePort: 30005
-  type: NodePort  
+      targetPort: backendport
+      nodePort: 30002
+  type: NodePort

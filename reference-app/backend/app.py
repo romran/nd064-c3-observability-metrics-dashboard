@@ -33,6 +33,8 @@ app.config['MONGO_URI'] = 'mongodb://example-mongodb-svc.default.svc.cluster.loc
 mongo = PyMongo(app)
 
 metrics = PrometheusMetrics(app, group_by='endpoint')
+metrics.info("app_info", "App Info, this can be anything you want", version="1.0.3")
+
 backend_trace = init_tracer('backend-trace')
 tracing = FlaskTracing(backend_trace, True, app)
 

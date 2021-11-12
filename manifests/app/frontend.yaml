@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-app
+  name: frontend
   annotations:
-    prometheus.io/path: /metrics
-    prometheus.io/port: frontend-port
-    prometheus.io/scrape: "true"
     sidecar.jaegertracing.io/inject: "true"
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /metrics
+    prometheus.io/port: frontendport
   labels:
     name: frontend
     release: prometheus
@@ -22,20 +22,22 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: romran/nd064-c3-frontend:latest
         imagePullPolicy: Always
+        image: romran/nd064-c3-frontend:latest
         ports:
-        - name: frontend-port
+        - name: frontendport
           containerPort: 8080
           protocol: TCP
         env:
         - name: JAEGER_HOST
-          value: my-traces-agent.observability.svc.cluster.local
+          value: simplest-query.observability.svc.cluster.local
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: frontend-service
+  labels:
+    app: frontend
 spec:
   selector:
     app: frontend
@@ -43,6 +45,6 @@ spec:
     - name: frontend
       protocol: TCP
       port: 80
-      targetPort: frontend-port
-      nodePort: 30010
+      targetPort: frontendport
+      nodePort: 30001
   type: NodePort

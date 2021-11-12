@@ -54,6 +54,7 @@ def init_tracer(service):
 
 tracer = init_tracer('first-service')
 metrics = PrometheusMetrics(app)
+metrics.info("app_info", "App Info, this can be anything you want", version="1.0.3")
 
 @app.route('/')
 def homepage():

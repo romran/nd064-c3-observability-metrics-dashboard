@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: frontend
   annotations:
-    sidecar.jaegertracing.io/inject: "true"
+    # sidecar.jaegertracing.io/inject: "true"
     prometheus.io/scrape: "true"
     prometheus.io/path: /metrics
     prometheus.io/port: frontendport
@@ -28,9 +28,9 @@ spec:
         - name: frontendport
           containerPort: 8080
           protocol: TCP
-        env:
-        - name: JAEGER_HOST
-          value: simplest-query.observability.svc.cluster.local
+        # env:
+        # - name: JAEGER_HOST
+        #   value: simplest-query.observability.svc.cluster.local:16686
 ---
 apiVersion: v1
 kind: Service
@@ -44,7 +44,8 @@ spec:
   ports:
     - name: frontend
       protocol: TCP
-      port: 80
+      port: 8080
       targetPort: frontendport
-      nodePort: 30001
-  type: NodePort
+      # nodePort: 30001
+  # type: NodePort
+  type: LoadBalancer

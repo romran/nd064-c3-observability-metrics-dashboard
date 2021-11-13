@@ -29,7 +29,7 @@ spec:
           protocol: TCP
         env:
         - name: JAEGER_HOST
-          value: simplest-query.observability.svc.cluster.local
+          value: my-traces-agent.observability.svc.cluster.local
 ---
 apiVersion: v1
 kind: Service

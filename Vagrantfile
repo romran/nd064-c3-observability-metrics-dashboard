@@ -49,7 +49,9 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 8888, host: 8888
   config.vm.network "forwarded_port", guest: 9090, host: 9090
   config.vm.network "forwarded_port", guest: 6443, host: 6443
-
+  for p in 30000..30010 # expose NodePort IP's
+    config.vm.network "forwarded_port", guest: p, host: p, protocol: "tcp"
+  end
   # config.vm.network "forwarded_port", guest: 16686, host: 8089
   # #config.vm.network "forwarded_port", guest: 8000, host: 8888
   # config.vm.network "forwarded_port", guest: 22, host: 2222, id: "ssh", disabled: true
@@ -59,9 +61,7 @@ Vagrant.configure("2") do |config|
   # config.vm.network "forwarded_port", guest: 16686, host: 16686 # Jaeger HTTP Access
   # config.vm.network "forwarded_port", guest: 16687, host: 16687 # Jaeger CR Access
   # config.vm.network "forwarded_port", guest: 32368 , host: 32368
-  # for p in 30000..30050 # expose NodePort IP's
-  #   config.vm.network "forwarded_port", guest: p, host: p, protocol: "tcp"
-  # end
+
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine and only allow access

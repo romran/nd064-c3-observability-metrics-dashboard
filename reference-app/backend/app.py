@@ -32,7 +32,8 @@ app.config['MONGO_DBNAME'] = 'example-mongodb'
 app.config['MONGO_URI'] = 'mongodb://example-mongodb-svc.default.svc.cluster.local:27017/example-mongodb'
 mongo = PyMongo(app)
 
-metrics = PrometheusMetrics(app, group_by='endpoint')
+# metrics = PrometheusMetrics(app, group_by='endpoint')
+metrics = PrometheusMetrics(app)
 metrics.info("app_info", "App Info, this can be anything you want", version="1.0.3")
 
 backend_trace = init_tracer('backend-service')
@@ -59,4 +60,6 @@ def add_star():
   return jsonify({'result' : output})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # app.run(debug=True)
+    app.run()
+

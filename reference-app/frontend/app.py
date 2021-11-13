@@ -25,7 +25,8 @@ def init_tracer(service):
 
 app = Flask(__name__)
 
-metrics = PrometheusMetrics(app, group_by='endpoint')
+# metrics = PrometheusMetrics(app, group_by='endpoint')
+metrics = PrometheusMetrics(app)
 metrics.info("app_info", "App Info, this can be anything you want", version="1.0.3")
 
 tracing = FlaskTracing(init_tracer('frontend-service'), True, app)
@@ -36,4 +37,5 @@ def homepage():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # app.run(debug=True)
+    app.run()

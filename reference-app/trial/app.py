@@ -53,7 +53,7 @@ def init_tracer(service):
     return config.initialize_tracer()
 
 tracer = init_tracer('first-service')
-metrics = PrometheusMetrics(app)
+metrics = PrometheusMetrics(app, group_by='endpoint')
 metrics.info("app_info", "App Info, this can be anything you want", version="1.0.3")
 
 @app.route('/')

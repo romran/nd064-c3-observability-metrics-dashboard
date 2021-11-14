@@ -6,7 +6,7 @@ metadata:
     prometheus.io/path: /metrics
     prometheus.io/port: 9090
     prometheus.io/scrape: true
-    sidecar.jaegertracing.io/inject: "true"
+    sidecar.jaegertracing.io/inject: true
   labels:
     app: backend
 spec:
@@ -24,6 +24,7 @@ spec:
         image: romran/nd064-c3-backend:latest
         imagePullPolicy: Always
         ports:
+        - name: backendport
         - containerPort: 8080
         env:
         - name: JAEGER_HOST

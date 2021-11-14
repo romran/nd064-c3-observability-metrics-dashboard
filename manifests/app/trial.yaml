@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: trial
   annotations:
-    prometheus.io/scrape: "true"
+    prometheus.io/scrape: true
     prometheus.io/path: /metrics
     prometheus.io/port: 9090
   labels:
@@ -22,7 +22,7 @@ spec:
       - name: trial
         image: romran/nd064-c3-trial:latest
         ports:
-        - name: frontendport
+        - name: trialport
           containerPort: 8080
 ---
 apiVersion: v1

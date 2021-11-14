@@ -69,8 +69,8 @@ Description: Seems given Mongo DB uri doesn't exist in backend service.
 *TODO:* We want to create an SLO guaranteeing that our application has a 99.95% uptime per month. Name three SLIs that you would use to measure the success of this SLO.
 
 - Availability: CPU usage between 0.05% and 99.95%
-- Traffic: more than 99.95% of HTTP request should return status code 20X  
-- Errors: less than 0.05% of HTTP request should return status code 50X or 40X
+- Traffic: more than 99.95% of HTTP request should return status code 20x  
+- Errors: less than 0.05% of HTTP request should return status code 50x or 40x
 
 ## Building KPIs for our plan
 *TODO*: Now that we have our SLIs and SLOs, create KPIs to accurately measure these metrics. We will make a dashboard for this, but first write them down here.

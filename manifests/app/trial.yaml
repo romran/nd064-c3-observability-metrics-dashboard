@@ -3,13 +3,11 @@ kind: Deployment
 metadata:
   name: trial
   annotations:
-    prometheus.io/path: /metrics
-    prometheus.io/port: trialport
     prometheus.io/scrape: "true"
-    sidecar.jaegertracing.io/inject: "true"
+    prometheus.io/path: /metrics
+    prometheus.io/port: 9090
   labels:
-    name: trial
-    release: prometheus
+    app: trial
 spec:
   replicas: 1
   selector:
@@ -24,24 +22,40 @@ spec:
       - name: trial
         image: romran/nd064-c3-trial:latest
         ports:
-        - name: trialport
+        - name: frontendport
           containerPort: 8080
-          protocol: TCP
-        env:
-        - name: JAEGER_HOST
-          value: my-traces-agent.observability.svc.cluster.local
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: trial-service
+  labels:
+    app: trial
 spec:
   selector:
     app: trial
   ports:
     - name: trial
-      protocol: TCP
-      port: 80
-      targetPort: trialport
-      nodePort: 30003
-  type: NodePort
+      port: 8083
+      targetPort: 8080 
+  type: LoadBalancer
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: trial
+  namespace: monitoring
+  labels:
+    app: trial
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      release: prometheus
+  endpoints:
+  - port: trial
+    path: /metrics
+    interval: 60s
+  namespaceSelector:
+    matchNames:
+    - default

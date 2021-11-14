@@ -74,5 +74,4 @@ def homepage():
     return jsonify(homepages)
 
 if __name__ == "__main__":
-    # app.run(debug=True,)
     app.run()

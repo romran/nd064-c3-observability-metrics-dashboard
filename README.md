@@ -76,8 +76,8 @@ Description: Seems given Mongo DB uri doesn't exist in backend service.
 *TODO*: Now that we have our SLIs and SLOs, create KPIs to accurately measure these metrics. We will make a dashboard for this, but first write them down here.
 
 - Availability KPI could be measured with `process_cpu_seconds_total` function
-- Traffic KPI could be measured with `flask_http_request_total` from `flask_prometheus_exporter` by filtering 20X status code 
-- Errors KPI could be measured with `flask_http_request_total` from `flask_prometheus_exporter` by filtering 50X and 40X status code 
+- Traffic KPI could be measured with `flask_http_request_total` from `flask_prometheus_exporter` by filtering 20x status code 
+- Errors KPI could be measured with `flask_http_request_total` from `flask_prometheus_exporter` by filtering 50x and 40x status code 
 
 ## Final Dashboard
 *TODO*: Create a Dashboard containing graphs that capture all the metrics of your KPIs and adequately representing your SLIs and SLOs. Include a screenshot of the dashboard here, and write a text description of what graphs are represented in the dashboard.  

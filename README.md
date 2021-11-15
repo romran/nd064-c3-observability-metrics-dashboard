@@ -69,13 +69,14 @@ Description: Seems given Mongo DB uri doesn't exist in backend service.
 *TODO:* We want to create an SLO guaranteeing that our application has a 99.95% uptime per month. Name three SLIs that you would use to measure the success of this SLO.
 
 - Availability: CPU usage between 0.05% and 99.95%
+- Saturation: memory usage between 0.05% and 99.95%
 - Traffic: more than 99.95% of HTTP request should return status code 20x  
 - Errors: less than 0.05% of HTTP request should return status code 50x or 40x
-
 ## Building KPIs for our plan
 *TODO*: Now that we have our SLIs and SLOs, create KPIs to accurately measure these metrics. We will make a dashboard for this, but first write them down here.
 
-- Availability KPI could be measured with `process_cpu_seconds_total` function
+- Availability KPI could be measured with `process_cpu_seconds_total` function for CPU usage
+- Saturation KPI could be measure with `container_memory_max_usage_bytes` function for memory usage
 - Traffic KPI could be measured with `flask_http_request_total` from `flask_prometheus_exporter` by filtering 20x status code 
 - Errors KPI could be measured with `flask_http_request_total` from `flask_prometheus_exporter` by filtering 50x and 40x status code 
 
@@ -83,3 +84,7 @@ Description: Seems given Mongo DB uri doesn't exist in backend service.
 *TODO*: Create a Dashboard containing graphs that capture all the metrics of your KPIs and adequately representing your SLIs and SLOs. Include a screenshot of the dashboard here, and write a text description of what graphs are represented in the dashboard.  
 
 ![](/answer-img/final-dashboard.PNG)
+`CPU usage` - application CPU usage to measure Availability SLI
+`Memory usage` - application memory usage to measure Saturation SLI
+`Number of 20x response` - number of 20x responses for frontend and backend to measure Traffic SLI
+`Number of 40x and 50x errors` - number of 40x and 50x errors to measure Errors SLI

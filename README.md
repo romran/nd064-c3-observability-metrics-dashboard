@@ -84,7 +84,7 @@ Description: Seems given Mongo DB uri doesn't exist in backend service.
 *TODO*: Create a Dashboard containing graphs that capture all the metrics of your KPIs and adequately representing your SLIs and SLOs. Include a screenshot of the dashboard here, and write a text description of what graphs are represented in the dashboard.  
 
 ![](/answer-img/final-dashboard.PNG)
-`CPU usage` - application CPU usage to measure Availability SLI
-`Memory usage` - application memory usage to measure Saturation SLI
-`Number of 20x response` - number of 20x responses for frontend and backend to measure Traffic SLI
-`Number of 40x and 50x errors` - number of 40x and 50x errors to measure Errors SLI
+- `CPU usage` - application CPU usage to measure Availability SLI
+- `Memory usage` - application memory usage to measure Saturation SLI
+- `Number of 20x response` - number of 20x responses for frontend and backend to measure Traffic SLI
+- `Number of 40x and 50x errors` - number of 40x and 50x errors to measure Errors SLI
